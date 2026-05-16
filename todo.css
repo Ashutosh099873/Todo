@@ -1,12 +1,15 @@
 .todos-bg-container {
   background-color: #f9fbfe;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 20px;
 }
-.check{
-    color: #096f92;
-    text-decoration: line-through;
-    background-color: #e6f6ff;
+
+.check {
+  color: #096f92;
+  text-decoration: line-through;
+  background-color: #e6f6ff;
 }
+
 .todos-heading {
   text-align: center;
   font-family: "Roboto";
@@ -47,6 +50,10 @@
 
 .todo-item-container {
   margin-top: 15px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .todo-user-input {
@@ -58,10 +65,8 @@
   border-radius: 10px;
   margin-top: 10px;
   padding: 15px;
+  outline: none;
 }
-
-
-
 
 .label-container {
   background-color: #e6f6ff;
@@ -73,6 +78,10 @@
   border-top: none;
   border-bottom: none;
   border-radius: 4px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .checkbox-input {
@@ -96,17 +105,25 @@
 }
 
 .delete-icon-container {
-  text-align: right;
   width: 18%;
+  text-align: right;
 }
 
 .delete-icon {
-    color: red;
-    font-size: 20px;
-    cursor: pointer;
-    padding: 10px;
+  color: red;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
 }
 
-.delete-icon-container {
-    margin-left: auto;
+.add-todo-button,
+.save-todo-button {
+  margin-top: 15px;
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #096f92;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
 }
