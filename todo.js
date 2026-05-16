@@ -17,6 +17,7 @@ function createAndAppendTodo(todo) {
 
     let todoId = "todo" + todo.uni;
 
+    // TODO ITEM
     let todoElement = document.createElement("li");
     todoElement.id = todoId;
     todoElement.classList.add("todo-item-container", "d-flex", "flex-row");
@@ -48,54 +49,46 @@ function createAndAppendTodo(todo) {
 
     labelContainer.appendChild(labelElement);
 
+    // DELETE ICON CONTAINER
+    let deleteIconContainer = document.createElement("div");
+    deleteIconContainer.classList.add("delete-icon-container");
 
+    // DELETE ICON
+    let deleteIcon = document.createElement("i");
+    deleteIcon.classList.add("fas", "fa-trash", "delete-icon");
 
-let deleteIconContainer = document.createElement("div");
-deleteIconContainer.classList.add("delete-icon-container");
+    // APPEND ICON
+    deleteIconContainer.appendChild(deleteIcon);
 
-let deleteIcon = document.createElement("i");
-deleteIcon.classList.add("fas", "fa-trash", "delete-icon");
+    // APPEND CONTAINER
+    labelContainer.appendChild(deleteIconContainer);
 
-// ADD ICON INTO CONTAINER
-deleteIconContainer.appendChild(deleteIcon);
+    // DELETE FUNCTION
+    deleteIcon.onclick = function () {
 
-// ADD CONTAINER INTO LABEL
-labelContainer.appendChild(deleteIconContainer);
+        todoItemsContainer.removeChild(todoElement);
 
-// DELETE FUNCTION
-deleteIcon.onclick = function () {
-    todoItemsContainer.removeChild(todoElement);
+        todoList = todoList.filter(function(eachTodo) {
+            return eachTodo.uni !== todo.uni;
+        });
 
-    todoList = todoList.filter(function(eachTodo) {
-        return eachTodo.uniqueNo !== todo.uniqueNo;
-    });
-
-    localStorage.setItem("todoList", JSON.stringify(todoList));
-};
-
-
-
-
-
-    
-
-// CHECKBOX FUNCTION
-inputElement.onclick = function () {
-    todo.isChecked = inputElement.checked;
-    labelElement.classList.toggle("check");
-    localStorage.setItem("todoList", JSON.stringify(todoList));
-};
+        localStorage.setItem("todoList", JSON.stringify(todoList));
+    };
 
     // CHECKBOX FUNCTION
     inputElement.onclick = function () {
+
         todo.isChecked = inputElement.checked;
+
         labelElement.classList.toggle("check");
+
         localStorage.setItem("todoList", JSON.stringify(todoList));
     };
 }
 
 // ADD TODO FUNCTION
 function addTodo() {
+
     let inputVal = todoUserInput.value.trim();
 
     if (inputVal === "") {
@@ -119,7 +112,9 @@ function addTodo() {
     };
 
     todoList.push(newTodo);
+
     createAndAppendTodo(newTodo);
+
     todoUserInput.value = "";
 }
 
@@ -128,6 +123,7 @@ addTodoBtn.onclick = addTodo;
 
 // ENTER KEY SUPPORT
 todoUserInput.addEventListener("keydown", function (event) {
+
     if (event.key === "Enter") {
         addTodo();
     }
@@ -135,16 +131,21 @@ todoUserInput.addEventListener("keydown", function (event) {
 
 // SAVE BUTTON
 saveTodoBtn.onclick = function () {
+
     localStorage.setItem("todoList", JSON.stringify(todoList));
 };
 
 // LOAD FROM LOCAL STORAGE
 window.onload = function () {
+
     let storedTodoList = localStorage.getItem("todoList");
 
     if (storedTodoList) {
+
         todoList = JSON.parse(storedTodoList);
+
         todoItemsContainer.innerHTML = "";
+
         count = todoList.length;
     }
 
