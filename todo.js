@@ -1,176 +1,118 @@
-let todoItemsContainer = document.getElementById("todoItemsContainer");
-let todoUserInput = document.getElementById("todoUserInput");
-let addTodoBtn = document.querySelector(".add-todo-button");
-let saveTodoBtn = document.querySelector(".save-todo-button");
-
-// GET TODOS FROM LOCAL STORAGE
+let todoItemsContainer=document.getElementById("todoItemsContainer");
+let todoUserInput=document.getElementById("todoUserInput");
+let addTodoBtn=document.querySelector(".add-todo-button");
+let saveTodoBtn=document.querySelector(".save-todo-button");
 function getTodoListFromLocalStorage() {
-
-    let stringifiedTodoList = localStorage.getItem("todoList");
-
-    let parsedTodoList = JSON.parse(stringifiedTodoList);
-
-    if (parsedTodoList === null) {
+    let stringifiedTodoList=localStorage.getItem("todoList");
+    let parsedTodoList=JSON.parse(stringifiedTodoList);
+    if(parsedTodoList===null) {
         return [
-            { text: "Learn HTML", uni: 1, isChecked: false },
-            { text: "Learn CSS", uni: 2, isChecked: false },
-            { text: "Learn JavaScript", uni: 3, isChecked: false }
+            {text:"Learn HTML",uni:1,isChecked:false},
+            {text:"Learn CSS",uni:2,isChecked:false},
+            {text:"Learn JavaScript",uni:3,isChecked:false}
         ];
     } else {
         return parsedTodoList;
     }
 }
-
-// TODO LIST
-let todoList = getTodoListFromLocalStorage();
-
-let count = todoList.length;
-
-// CREATE TODO ITEM
+let todoList=getTodoListFromLocalStorage();
+let count=todoList.length;
 function createAndAppendTodo(todo) {
-
-    let todoId = "todo" + todo.uni;
-
-    // TODO ITEM
-    let todoElement = document.createElement("li");
-    todoElement.id = todoId;
-    todoElement.classList.add("todo-item-container", "d-flex", "flex-row");
-
+    let todoId="todo"+todo.uni;
+    let todoElement=document.createElement("li");
+    todoElement.id=todoId;
+    todoElement.classList.add("todo-item-container","d-flex","flex-row");
     todoItemsContainer.appendChild(todoElement);
-
-    // CHECKBOX
-    let inputElement = document.createElement("input");
-
-    inputElement.type = "checkbox";
-    inputElement.id = "checkbox" + todo.uni;
+    let inputElement=document.createElement("input");
+    inputElement.type="checkbox";
+    inputElement.id="checkbox"+todo.uni;
     inputElement.classList.add("checkbox-input");
-
-    inputElement.checked = todo.isChecked;
-
+    inputElement.checked=todo.isChecked;
     todoElement.appendChild(inputElement);
-
-    // LABEL CONTAINER
-    let labelContainer = document.createElement("div");
-
+    let labelContainer=document.createElement("div");
     labelContainer.classList.add("label-container");
-
     todoElement.appendChild(labelContainer);
-
-    // LABEL
-    let labelElement = document.createElement("label");
-
-    labelElement.setAttribute("for", inputElement.id);
-
-    labelElement.id = "label" + todo.uni;
-
+    let labelElement=document.createElement("label");
+    labelElement.setAttribute("for",inputElement.id);
+    labelElement.id="label"+todo.uni;
     labelElement.classList.add("checkbox-label");
+    labelElement.textContent=todo.text;
 
-    labelElement.textContent = todo.text;
-
-    if (todo.isChecked) {
+    if(todo.isChecked) {
         labelElement.classList.add("check");
     }
 
     labelContainer.appendChild(labelElement);
 
-    // DELETE ICON CONTAINER
-    let deleteIconContainer = document.createElement("div");
-
+    let deleteIconContainer=document.createElement("div");
     deleteIconContainer.classList.add("delete-icon-container");
 
-    // DELETE ICON
-    let deleteIcon = document.createElement("i");
+    let deleteIcon=document.createElement("i");
+    deleteIcon.classList.add("fas","fa-trash","delete-icon");
 
-    deleteIcon.classList.add("fas", "fa-trash", "delete-icon");
-
-    // APPEND ICON
     deleteIconContainer.appendChild(deleteIcon);
-
-    // APPEND CONTAINER
     labelContainer.appendChild(deleteIconContainer);
 
-    // DELETE FUNCTION
-    deleteIcon.onclick = function () {
-
+    deleteIcon.onclick=function () {
         todoItemsContainer.removeChild(todoElement);
 
-        todoList = todoList.filter(function(eachTodo) {
-            return eachTodo.uni !== todo.uni;
+        todoList=todoList.filter(function (eachTodo) {
+            return eachTodo.uni!==todo.uni;
         });
 
-        localStorage.setItem("todoList", JSON.stringify(todoList));
+        localStorage.setItem("todoList",JSON.stringify(todoList));
     };
 
-    // CHECKBOX FUNCTION
-    inputElement.onclick = function () {
-
-        todo.isChecked = inputElement.checked;
-
+    inputElement.onclick=function () {
+        todo.isChecked=inputElement.checked;
         labelElement.classList.toggle("check");
-
-        localStorage.setItem("todoList", JSON.stringify(todoList));
+        localStorage.setItem("todoList",JSON.stringify(todoList));
     };
 }
 
-// ADD TODO FUNCTION
 function addTodo() {
+    let inputVal=todoUserInput.value.trim();
 
-    let inputVal = todoUserInput.value.trim();
-
-    if (inputVal === "") {
+    if(inputVal==="") {
         alert("Please enter a todo item.");
         return;
     }
 
-    for (let todo of todoList) {
-
-        if (todo.text.toLowerCase() === inputVal.toLowerCase()) {
-
+    for(let todo of todoList) {
+        if(todo.text.toLowerCase()===inputVal.toLowerCase()) {
             alert("This todo item already exists.");
-
             return;
         }
     }
 
-    count += 1;
+    count+=1;
 
-    let newTodo = {
-        text: inputVal,
-        uni: count,
-        isChecked: false
+    let newTodo={
+        text:inputVal,
+        uni:count,
+        isChecked:false
     };
 
     todoList.push(newTodo);
-
     createAndAppendTodo(newTodo);
+    todoUserInput.value="";
 
-    todoUserInput.value = "";
-
-    // SAVE TO LOCAL STORAGE
-    localStorage.setItem("todoList", JSON.stringify(todoList));
+    localStorage.setItem("todoList",JSON.stringify(todoList));
 }
 
-// BUTTON CLICK
-addTodoBtn.onclick = addTodo;
+addTodoBtn.onclick=addTodo;
 
-// ENTER KEY SUPPORT
-todoUserInput.addEventListener("keydown", function(event) {
-
-    if (event.key === "Enter") {
+todoUserInput.addEventListener("keydown",function (event) {
+    if(event.key==="Enter") {
         addTodo();
     }
 });
 
-// SAVE BUTTON
-saveTodoBtn.onclick = function() {
-
-    localStorage.setItem("todoList", JSON.stringify(todoList));
-
+saveTodoBtn.onclick=function () {
+    localStorage.setItem("todoList",JSON.stringify(todoList));
     alert("Todo List Saved");
 };
 
-// LOAD TODOS
-for (let todo of todoList) {
-
+for(let todo of todoList) {
     createAndAppendTodo(todo);
 }
