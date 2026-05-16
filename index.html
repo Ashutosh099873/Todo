@@ -1,81 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Advanced Todo App</title>
+    <title>Todo App</title>
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="todo.css" />
+
+    <script src="todo.js" defer></script>
 
     <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
 
     <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
-</head>
 
-<body>
+  </head>
 
-    <div class="main-container">
+  <body>
 
-        <div class="todo-card">
+    <div class="todos-bg-container">
 
-            <h1 class="main-heading">Todo App</h1>
+      <div class="container">
 
-            <div class="input-container">
+        <div class="row">
 
-                <input
-                    type="text"
-                    id="todoInput"
-                    placeholder="Enter your task..."
-                    class="todo-input"
-                />
+          <div class="col-12">
 
-                <button id="addBtn" class="btn btn-primary">
-                    Add
-                </button>
+            <h1 class="todos-heading">Todos</h1>
 
-            </div>
+            <h1 class="create-task-heading">
+              Create
+              <span class="create-task-heading-subpart">Task</span>
+            </h1>
 
-            <div class="top-bar">
+            <input
+              type="text"
+              id="todoUserInput"
+              class="todo-user-input"
+            />
 
-                <button id="themeBtn" class="btn btn-dark">
-                    Toggle Dark Mode
-                </button>
+            <button class="add-todo-button btn btn-primary p-2 m-2">
+              Add
+            </button>
 
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search task..."
-                    class="search-input"
-                />
+            <button class="save-todo-button btn btn-primary p-2 m-2">
+              SAVE
+            </button>
 
-            </div>
+            <h1 class="todo-items-heading">
+              My
+              <span class="todo-items-heading-subpart">Tasks</span>
+            </h1>
 
-            <div class="task-info">
+            <ul
+              class="todo-items-container"
+              id="todoItemsContainer"
+            ></ul>
 
-                <p>Total Tasks:
-                    <span id="totalTasks">0</span>
-                </p>
-
-                <p>Completed:
-                    <span id="completedTasks">0</span>
-                </p>
-
-            </div>
-
-            <ul id="todoList" class="todo-list"></ul>
+          </div>
 
         </div>
 
+      </div>
+
     </div>
 
-    <script src="script.js"></script>
-
-</body>
+  </body>
 </html>
