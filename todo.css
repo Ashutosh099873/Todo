@@ -100,6 +100,7 @@
   width: 18%;
 }
 
-.delete-icon {
-  padding: 15px;
+.delete-icon{
+    cursor:pointer;
+    color:red;
 }
