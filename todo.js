@@ -53,16 +53,8 @@ function createAndAppendTodo(todo) {
     deleteIconContainer.classList.add("delete-icon-container");
     labelContainer.appendChild(deleteIconContainer);
 
-    let deleteIcon = document.createElement("i");
-    deleteIcon.classList.add("far", "fa-trash-alt", "delete-icon");
-    deleteIconContainer.appendChild(deleteIcon);
-
-    // DELETE FUNCTION
-    deleteIcon.onclick = function () {
-        todoItemsContainer.removeChild(todoElement);
-        todoList = todoList.filter(t => t.uni !== todo.uni);
-        localStorage.setItem("todoList", JSON.stringify(todoList));
-    };
+   let deleteIcon = document.createElement("i");
+deleteIcon.classList.add("fas", "fa-trash", "delete-icon");
 
     // CHECKBOX FUNCTION
     inputElement.onclick = function () {
