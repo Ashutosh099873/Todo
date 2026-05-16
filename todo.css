@@ -101,7 +101,12 @@
 }
 
 .delete-icon {
-  padding: 15px;
-  cursor: pointer;
-  color: red;
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.delete-icon-container {
+    margin-left: auto;
 }
