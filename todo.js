@@ -47,15 +47,37 @@ function createAndAppendTodo(todo) {
     }
 
     labelContainer.appendChild(labelElement);
+
+
+
 let deleteIconContainer = document.createElement("div");
 deleteIconContainer.classList.add("delete-icon-container");
-labelContainer.appendChild(deleteIconContainer);
 
 let deleteIcon = document.createElement("i");
 deleteIcon.classList.add("fas", "fa-trash", "delete-icon");
 
-// IMPORTANT
+// ADD ICON INTO CONTAINER
 deleteIconContainer.appendChild(deleteIcon);
+
+// ADD CONTAINER INTO LABEL
+labelContainer.appendChild(deleteIconContainer);
+
+// DELETE FUNCTION
+deleteIcon.onclick = function () {
+    todoItemsContainer.removeChild(todoElement);
+
+    todoList = todoList.filter(function(eachTodo) {
+        return eachTodo.uniqueNo !== todo.uniqueNo;
+    });
+
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+};
+
+
+
+
+
+    
 
 // CHECKBOX FUNCTION
 inputElement.onclick = function () {
